@@ -21,6 +21,8 @@ and open the template in the editor.
         $result = selectAllSweets($mysqli->conn);
         
         echo "<h1>SQL-04</h1>";
+
+        echo "<h2>Samlet prisliste over alle bolcher</h2>";
         
         echo "<h3>SELECT sweetID, name, Colour.colour, weight, Sourness.sourness, Strength.strength, Flavour.flavour, price 
             FROM Boiledsweet
@@ -58,7 +60,7 @@ and open the template in the editor.
                     <td>" . round($sellingPrice100) . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
         ?>
     </body>

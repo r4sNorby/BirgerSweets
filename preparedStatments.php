@@ -36,7 +36,7 @@ function getSweetsByColours($conn, $colours) {
             ORDER BY sweetID";
 
     $stmt = $conn->prepare($sql);
-    
+
     $dataTypes = str_repeat("s", count($colours));
     $stmt->bind_param($dataTypes, ...$colours);
 
@@ -182,8 +182,6 @@ function getRandomSweets($conn, $amount) {
     return $stmt;
 }
 
-
-
 function getSweetsByContainingLetterAndColours($conn, $letter, $colours) {
     $letter = "%" . $letter . "%";
     $questionMarks = calculateQuestionMarks(count($colours));
@@ -198,9 +196,37 @@ function getSweetsByContainingLetterAndColours($conn, $letter, $colours) {
             ORDER BY sweetID ASC";
 
     $stmt = $conn->prepare($sql);
-    
+
     $dataTypes = str_repeat("s", count($colours));
     $stmt->bind_param("s" . $dataTypes, $letter, ...$colours);
-    
+
     return $stmt;
+}
+
+// ------------------------------- SQL-06 ----------------------------------- //
+
+function getCustomersByID($conn) {
+    $sql = "SELECT Customer.customerID, firstName, lastName, Address.address, Address.zipCode, ZipCity.city, PhoneNumber.phoneNumber 
+            FROM Customer
+            INNER JOIN CustomerHasAddress ON Customer.customerID = CustomerHasAddress.customerID
+            INNER JOIN Address ON CustomerHasAddress.addressID = Address.addressID
+            INNER JOIN ZipCity ON Address.zipCode = ZipCity.zipCode
+            INNER JOIN CustomerHasPhoneNumber ON Customer.customerID = CustomerHasPhoneNumber.customerID
+            INNER JOIN PhoneNumber ON CustomerHasPhoneNumber.phoneID = PhoneNumber.phoneID
+            ORDER BY customerID ASC";
+
+    return $conn->query($sql);
+}
+
+function getOrdersByDate($conn) {
+    $sql = "SELECT Customer.customerID, firstName, lastName, Address.address, Address.zipCode, ZipCity.city, PhoneNumber.phoneNumber 
+            FROM Customer
+            INNER JOIN CustomerHasAddress ON Customer.customerID = CustomerHasAddress.customerID
+            INNER JOIN Address ON CustomerHasAddress.addressID = Address.addressID
+            INNER JOIN ZipCity ON Address.zipCode = ZipCity.zipCode
+            INNER JOIN CustomerHasPhoneNumber ON Customer.customerID = CustomerHasPhoneNumber.customerID
+            INNER JOIN PhoneNumber ON CustomerHasPhoneNumber.phoneID = PhoneNumber.phoneID
+            ORDER BY customerID ASC";
+
+    return $conn->query($sql);
 }

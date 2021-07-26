@@ -56,7 +56,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -98,7 +98,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -140,7 +140,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -182,7 +182,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -223,7 +223,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -264,7 +264,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -305,7 +305,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -346,7 +346,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -387,7 +387,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
 
         //--------------------------------------------------------------------//
@@ -432,7 +432,7 @@ and open the template in the editor.
                     <td>" . $row['price'] . "</td>
                     </tr>";
             }
-            echo "</tr></table>";
+            echo "</table>";
         }
         ?>
     </body>
