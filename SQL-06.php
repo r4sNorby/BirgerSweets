@@ -19,7 +19,7 @@ and open the template in the editor.
         
         $mysqli = new connection();
 
-        $result = getCustomersByID($mysqli->conn);
+        $customerByIDResult = getCustomersByID($mysqli->conn);
 
         echo "<h2>Alle kunder sorteret efter ID</h2>";
 
@@ -41,8 +41,8 @@ and open the template in the editor.
                     <th>Postnummer</th>
                     <th>Telefonnummer</th>
                 </tr>";
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($customerByIDResult->num_rows > 0) {
+            while ($row = $customerByIDResult->fetch_assoc()) {
                 echo "
                     <tr>
                     <td>" . $row['customerID'] . "</td>
@@ -55,6 +55,78 @@ and open the template in the editor.
             }
             echo "</table>";
         }
+
+        //--------------------------------------------------------------------//
+        echo "<hr>";
+        
+        $ordersByDateResult = getOrdersByDate($mysqli->conn);
+
+        echo "<h2>Alle ordrer sorteret efter dato</h2>";
+
+        echo "<h3>SELECT CustomerOrder.orderDate, CustomerOrder.orderID, Customer.firstName, Customer.lastName
+            FROM CustomerOrder
+            INNER JOIN Customer ON CustomerOrder.customerID = Customer.customerID
+            ORDER BY CustomerOrder.orderDate ASC</h3>";
+
+        echo "<table>
+                <tr>
+                    <th>Dato</th>
+                    <th>Ordre ID</th>
+                    <th>Fornavn</th>
+                    <th>Efternavn</th>
+                </tr>";
+        if ($ordersByDateResult->num_rows > 0) {
+            while ($row = $ordersByDateResult->fetch_assoc()) {
+                echo "
+                    <tr>
+                    <td>" . $row['orderDate'] . "</td>
+                    <td>" . $row['orderID'] . "</td>
+                    <td>" . $row['firstName'] . "</td>
+                    <td>" . $row['lastName'] . "</td>
+                    </tr>";
+            }
+            echo "</table>";
+        }
+
+        //--------------------------------------------------------------------//
+        echo "<hr>";
+        
+        $latestOrderResult = getLatestOrder($mysqli->conn);
+
+        echo "<h2>Den seneste ordre</h2>";
+
+        echo "<h3>SELECT CustomerOrder.orderDate, CustomerOrder.orderID, BoiledSweet.name, OrderedSweets.amount, Customer.firstName, Customer.lastName
+            FROM CustomerOrder
+            INNER JOIN Customer ON CustomerOrder.customerID = Customer.customerID
+            INNER JOIN OrderedSweets ON CustomerOrder.orderID = OrderedSweets.orderID
+            INNER JOIN BoiledSweet ON OrderedSweets.sweetID = BoiledSweet.sweetID
+            WHERE CustomerOrder.orderDate = (SELECT MAX(CustomerOrder.orderDate) FROM CustomerOrder)
+            ORDER BY CustomerOrder.orderDate ASC;</h3>";
+
+        echo "<table>
+                <tr>
+                    <th>Dato</th>
+                    <th>Ordre ID</th>
+                    <th>Bolche Navn</th>
+                    <th>Mængde</th>
+                    <th>Fornavn</th>
+                    <th>Efternavn</th>
+                </tr>";
+        if ($latestOrderResult->num_rows > 0) {
+            while ($row = $latestOrderResult->fetch_assoc()) {
+                echo "
+                    <tr>
+                    <td>" . $row['orderDate'] . "</td>
+                    <td>" . $row['orderID'] . "</td>
+                    <td>" . $row['name'] . "</td>
+                    <td>" . $row['amount'] . "</td>
+                    <td>" . $row['firstName'] . "</td>
+                    <td>" . $row['lastName'] . "</td>
+                    </tr>";
+            }
+            echo "</table>";
+        }
+        
         ?>
     </body>
 </html>

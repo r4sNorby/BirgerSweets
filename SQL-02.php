@@ -229,7 +229,7 @@ and open the template in the editor.
         //--------------------------------------------------------------------//
         echo "<hr>";
 
-        $stmt = getSweetsByContainingLetterAlphabetical($mysqli->conn, "e");
+        $containingLetterStmt = getSweetsByContainingLetterAlphabetical($mysqli->conn, "e");
 
         echo "<h2>Mindst ét \"e\" i navnet på bolchet</h2>";
 
@@ -249,8 +249,8 @@ and open the template in the editor.
                     <th>Smags-type</th>
                     <th>Råvarepris (Øre)</th>
                 </tr>";
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        if ($containingLetterStmt->execute()) {
+            $result = $containingLetterStmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo "
                     <tr>
@@ -270,7 +270,7 @@ and open the template in the editor.
         //--------------------------------------------------------------------//
         echo "<hr>";
 
-        $stmt = getSweetsByWeightLessThan($mysqli->conn, 10);
+        $weightByLessThanStmt = getSweetsByWeightLessThan($mysqli->conn, 10);
 
         echo "<h2>Bolcher mindre end 10g sorteret efter vægt, stigende</h2>";
 
@@ -290,8 +290,8 @@ and open the template in the editor.
                     <th>Smags-type</th>
                     <th>Råvarepris (Øre)</th>
                 </tr>";
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        if ($weightByLessThanStmt->execute()) {
+            $result = $weightByLessThanStmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo "
                     <tr>
@@ -311,7 +311,7 @@ and open the template in the editor.
         //--------------------------------------------------------------------//
         echo "<hr>";
 
-        $stmt = getSweetsByWeightBetween($mysqli->conn, 10, 12);
+        $weightBetweenStmt = getSweetsByWeightBetween($mysqli->conn, 10, 12);
 
         echo "<h2>Bolcher mellem 10g og 12g, alfabetisk, derefter vægt</h2>";
 
@@ -331,8 +331,8 @@ and open the template in the editor.
                     <th>Smags-type</th>
                     <th>Råvarepris (Øre)</th>
                 </tr>";
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        if ($weightBetweenStmt->execute()) {
+            $result = $weightBetweenStmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo "
                     <tr>
@@ -352,7 +352,7 @@ and open the template in the editor.
         //--------------------------------------------------------------------//
         echo "<hr>";
 
-        $stmt = getAmountOfHeaviestSweets($mysqli->conn, 3);
+        $heaviestSweetsStmt = getAmountOfHeaviestSweets($mysqli->conn, 3);
 
         echo "<h2>De tre tungeste bolcher</h2>";
 
@@ -372,8 +372,8 @@ and open the template in the editor.
                     <th>Smags-type</th>
                     <th>Råvarepris (Øre)</th>
                 </tr>";
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        if ($heaviestSweetsStmt->execute()) {
+            $result = $heaviestSweetsStmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo "
                     <tr>
@@ -393,7 +393,7 @@ and open the template in the editor.
         //--------------------------------------------------------------------//
         echo "<hr>";
 
-        $stmt = getRandomSweets($mysqli->conn, 1);
+        $randomStmt = getRandomSweets($mysqli->conn, 1);
 
         echo "<h2>Tilfældigt bolche</h2>";
 
@@ -417,8 +417,8 @@ and open the template in the editor.
                     <th>Smags-type</th>
                     <th>Råvarepris (Øre)</th>
                 </tr>";
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        if ($randomStmt->execute()) {
+            $result = $randomStmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo "
                     <tr>

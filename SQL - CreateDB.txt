@@ -79,6 +79,7 @@ CREATE TABLE CustomerHasPhoneNumber (
 CREATE TABLE CustomerOrder (
     orderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     customerID INT NOT NULL,
+    orderDate DATE NOT NULL,
     FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 );
 

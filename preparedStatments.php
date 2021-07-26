@@ -206,7 +206,7 @@ function getSweetsByContainingLetterAndColours($conn, $letter, $colours) {
 // ------------------------------- SQL-06 ----------------------------------- //
 
 function getCustomersByID($conn) {
-    $sql = "SELECT Customer.customerID, firstName, lastName, Address.address, Address.zipCode, ZipCity.city, PhoneNumber.phoneNumber 
+    $sql = "SELECT Customer.customerID, Customer.firstName, Customer.lastName, Address.address, Address.zipCode, ZipCity.city, PhoneNumber.phoneNumber 
             FROM Customer
             INNER JOIN CustomerHasAddress ON Customer.customerID = CustomerHasAddress.customerID
             INNER JOIN Address ON CustomerHasAddress.addressID = Address.addressID
@@ -219,14 +219,32 @@ function getCustomersByID($conn) {
 }
 
 function getOrdersByDate($conn) {
-    $sql = "SELECT Customer.customerID, firstName, lastName, Address.address, Address.zipCode, ZipCity.city, PhoneNumber.phoneNumber 
-            FROM Customer
-            INNER JOIN CustomerHasAddress ON Customer.customerID = CustomerHasAddress.customerID
-            INNER JOIN Address ON CustomerHasAddress.addressID = Address.addressID
-            INNER JOIN ZipCity ON Address.zipCode = ZipCity.zipCode
-            INNER JOIN CustomerHasPhoneNumber ON Customer.customerID = CustomerHasPhoneNumber.customerID
-            INNER JOIN PhoneNumber ON CustomerHasPhoneNumber.phoneID = PhoneNumber.phoneID
-            ORDER BY customerID ASC";
+    $sql = "SELECT CustomerOrder.orderDate, CustomerOrder.orderID, Customer.firstName, Customer.lastName
+            FROM CustomerOrder
+            INNER JOIN Customer ON CustomerOrder.customerID = Customer.customerID
+            ORDER BY CustomerOrder.orderDate ASC";
+
+    return $conn->query($sql);
+}
+
+function getLatestOrder($conn) {
+    $sql = "SELECT CustomerOrder.orderDate, CustomerOrder.orderID, BoiledSweet.name, OrderedSweets.amount, Customer.firstName, Customer.lastName
+            FROM CustomerOrder
+            INNER JOIN Customer ON CustomerOrder.customerID = Customer.customerID
+            INNER JOIN OrderedSweets ON CustomerOrder.orderID = OrderedSweets.orderID
+            INNER JOIN BoiledSweet ON OrderedSweets.sweetID = BoiledSweet.sweetID
+            WHERE CustomerOrder.orderDate = (SELECT MAX(CustomerOrder.orderDate) FROM CustomerOrder)
+            ORDER BY CustomerOrder.orderDate ASC;";
+
+    return $conn->query($sql);
+}
+
+function getOrdersByDatse($conn) {
+    $sql = "SELECT CustomerOrder.orderID, BoiledSweet.name, OrderedSweets.amount, CustomerOrder.orderDate
+            FROM CustomerOrder
+            INNER JOIN OrderedSweets ON CustomerOrder.orderID = OrderedSweets.orderID
+            INNER JOIN BoiledSweet ON OrderedSweets.sweetID = BoiledSweet.sweetID
+            ORDER BY CustomerOrder.orderDate ASC";
 
     return $conn->query($sql);
 }
