@@ -1,0 +1,127 @@
+INSERT INTO Colour (colour)
+VALUES 
+('Rød'),
+('Orange'),
+('Gul'),
+('Sort'),
+('Lyseblå'),
+('Blå');
+
+INSERT INTO Sourness (sourness)
+VALUES 
+('Sødt'),
+('Let bittert'),
+('Bittert');
+
+INSERT INTO Strength (strength)
+VALUES 
+('Mild'),
+('Medium'),
+('Stærk');
+
+INSERT INTO Flavour (flavour)
+VALUES 
+('Jordbær'),
+('Appelsin'),
+('Citron'),
+('Salmiak'),
+('Anis');
+
+INSERT INTO Boiledsweet (name, colourID, weight, sournessID, strengthID, flavourID, price)
+VALUES 
+('Jordbær', 1, 11, 1, 1, 1, 16),
+('Appelsin', 2, 12, 1, 1, 2, 13),
+('Citron', 3, 10, 3, 1, 3, 14),
+('Salmiaktop', 4, 6, 1, 3, 4, 12),
+('Blå haj', 5, 22, 2, 2, 5, 19),
+('Rød perle', 1, 8, 1, 2, 1, 9),
+('Gul perle', 3, 8, 3, 2, 3, 10),
+('Blå perle', 6, 8, 2, 3, 5, 11);
+
+INSERT INTO Customer (firstName, lastName)
+VALUES
+('Hermione', 'Granger'), 
+('Dudley', 'Dursley'),
+('Wendy', 'Darling'), 
+('Ronald', 'Weasley'),
+('Rasmus', 'Nørby'),
+('Peter', 'Parker'),
+('Person', 'Mann');
+
+INSERT INTO ZipCity (zipCode, city)
+VALUES 
+(5000, 'Odense C'),
+(5260, 'Odense S'),
+(5230, 'Odense M');
+
+INSERT INTO Address (address, zipCode)
+VALUES 
+('Hogwartslane 101', 5000),
+('4 Privet Drive', 5230),
+('Bloomsburylane 25', 5260),
+('The Burrow', 5000),
+('Wouldn\'t you like to know', 5000),
+('Avengers Tower', 5230);
+
+INSERT INTO CustomerHasAddress (addressId, customerID)
+VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(5, 7);
+
+INSERT INTO PhoneNumber (phoneNumber)
+VALUES 
+('84756123'), 
+('46758312'),
+('65478231'), 
+('46528731'),
+('12345678');
+
+INSERT INTO CustomerHasPhoneNumber (customerID, phoneID)
+VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 5),
+(7, 5);
+
+INSERT INTO CustomerOrder (customerID)
+VALUES 
+(1),
+(1),
+(1),
+(2),
+(2),
+(3),
+(3),
+(4),
+(5),
+(6);
+
+INSERT INTO OrderedSweets (sweetID, orderID, amount)
+VALUES 
+(6, 1,10),
+(3, 1, 3),
+(5, 1, 1),
+(5, 2, 1),
+(2, 2, 3),
+(4, 3, 16),
+(5, 3, 1),
+(1, 3, 2),
+(1, 4, 25),
+(5, 5, 3),
+(4, 5, 2),
+(4, 6, 1),
+(8, 6, 2),
+(7, 7, 6),
+(4, 8, 1),
+(8, 8, 3),
+(6, 8, 4),
+(3, 9, 1),
+(7, 10, 4);

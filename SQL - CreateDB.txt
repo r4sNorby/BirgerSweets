@@ -1,0 +1,92 @@
+CREATE DATABASE BirgerSweets;
+
+USE BirgerSweets;
+
+CREATE TABLE Colour (
+    colourID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    colour VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE Sourness (
+    sournessID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sourness VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE Strength (
+    strengthID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    strength VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE Flavour (
+    flavourID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    flavour VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE BoiledSweet (
+    sweetID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(60) NOT NULL,
+    colourID INT NOT NULL,
+    weight INT NOT NULL,
+    sournessID INT NOT NULL,
+    strengthID INT NOT NULL,
+    flavourID INT NOT NULL,
+    price INT NOT NULL,
+    FOREIGN KEY (colourID) REFERENCES Colour(colourID),
+    FOREIGN KEY (sournessID) REFERENCES Sourness(sournessID),
+    FOREIGN KEY (strengthID) REFERENCES Strength(strengthID),
+    FOREIGN KEY (flavourID) REFERENCES Flavour(flavourID)
+);
+
+CREATE TABLE Customer (
+    customerID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE ZipCity (
+    zipCode INT NOT NULL PRIMARY KEY,
+    city VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Address (
+    addressID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    address VARCHAR(200) NOT NULL,
+    zipCode INT NOT NULL,
+    FOREIGN KEY (zipCode) REFERENCES ZipCity(zipCode)
+);
+
+CREATE TABLE CustomerHasAddress (
+    addressID INT NOT NULL,
+    customerID INT NOT NULL,
+    FOREIGN KEY (addressID) REFERENCES Address(addressID),
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+    PRIMARY KEY (addressID, customerID)
+);
+
+CREATE TABLE PhoneNumber (
+    phoneID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    phoneNumber INT NOT NULL
+);
+
+CREATE TABLE CustomerHasPhoneNumber (
+    phoneID INT NOT NULL,
+    customerID INT NOT NULL,
+    FOREIGN KEY (phoneID) REFERENCES PhoneNumber(phoneID),
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+    PRIMARY KEY (phoneID, customerID)
+);
+
+CREATE TABLE CustomerOrder (
+    orderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customerID INT NOT NULL,
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID)
+);
+
+CREATE TABLE OrderedSweets (
+    sweetID INT NOT NULL,
+    orderID INT NOT NULL,
+    amount INT NOT NULL,
+    FOREIGN KEY (sweetID) REFERENCES BoiledSweet(sweetID),
+    FOREIGN KEY (orderID) REFERENCES CustomerOrder(orderID),
+    PRIMARY KEY (sweetID, orderID)
+);
