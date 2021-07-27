@@ -39,6 +39,7 @@ and open the template in the editor.
                     <th>Efternavn</th>
                     <th>Adresse</th>
                     <th>Postnummer</th>
+                    <th>By</th>
                     <th>Telefonnummer</th>
                 </tr>";
         if ($customerByIDResult->num_rows > 0) {
@@ -47,6 +48,7 @@ and open the template in the editor.
                     <tr>
                     <td>" . $row['customerID'] . "</td>
                     <td>" . $row['firstName'] . "</td>
+                    <td>" . $row['lastName'] . "</td>
                     <td>" . $row['address'] . "</td>
                     <td>" . $row['zipCode'] . "</td>
                     <td>" . $row['city'] . "</td>
